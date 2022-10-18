@@ -23,6 +23,8 @@
   "dependencies": {
     "@openzeppelin/contracts": "^4.7.3",
     "abdk-libraries-solidity": "^3.0.0",
+    "dotenv": "^16.0.3",
+    "dotnet": "^1.1.4",
     "global": "^4.4.0",
     "remixd": "^0.2.4"
   }

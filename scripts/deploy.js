@@ -7,12 +7,20 @@
 const hre = require("hardhat");
 
 async function main() {
-  const Buyer = await hre.ethers.getContractFactory("Buyer");
-  const buy = await Buyer.deploy("0x4a1868E800198C010208154859feE45acA03093A","3","0x2AB0e9e4eE70FFf1fB9D67031E44F6410170d00e");
-  await buy.deployed();
+
+  const Math = await ethers.getContractFactory("Math");
+  const math = await Math.deploy();
+  console.log(math.address);
+
+  const XENCryptoFac = await ethers.getContractFactory("XENCrypto", {
+    libraries: {
+      Math: math.address,
+    },
+  });
+  xen = await XENCryptoFac.deploy();  
 
   console.log(
-    `Buyer deployed to ${buy.address}`
+    `XEN deployed to ${xen.address}`
   );
 }
 

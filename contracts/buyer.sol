@@ -15,8 +15,9 @@ interface IBuyer{
 
 contract MintForMint is Ownable{
     address public _owner;
+   
     uint8 public _day;
-    IBuyer public _buyer;    
+    IBuyer public _buyer;
     XEN public _token;
 
     constructor(IBuyer buyer,address payable owner, uint8 day) {        
@@ -46,7 +47,8 @@ contract Buyer is Ownable,IBuyer{
 
 
     uint256 public constant SECONDS_IN_DAY = 3_600 * 24;
-    
+    uint256 _endTime;     
+
     uint8 public _day;
     address payable public _owner;
     XEN public _addr;
@@ -100,6 +102,8 @@ contract Buyer is Ownable,IBuyer{
             mints[id] = info;
             idTracker.increment();   
         }
+
+        _endTime = block.timestamp + _day * SECONDS_IN_DAY;
     }
 
     function claimToken(uint8 number) external onlyOwner {
@@ -110,5 +114,5 @@ contract Buyer is Ownable,IBuyer{
             info.mint.claim();
             claimTracker.increment();   
         }
-    }
+    }    
 }
